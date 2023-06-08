@@ -32,3 +32,19 @@ export async function getCharacters() {
   const responseData = await response.json();
   return responseData;
 }
+
+export async function getCharacterById(characterId: string) {
+  const token = process.env.READ_CHARACTER_KEY;
+  const url = `${process.env.STRAPI_API_URL}/api/characters?filters[id]=${characterId}`;
+  const response = await fetch(url as string, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const responseData = await response.json();
+  return responseData;
+}
+
+

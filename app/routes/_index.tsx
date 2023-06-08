@@ -18,7 +18,7 @@ const Card = ({ character }: { character: any }) => {
   return (
     <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
       <img
-        className="w-full h-56 object-cover object-center"
+        className="w-full h-56 object-fit object-top"
         src={character.imageUrl}
         alt={character.name}
       />

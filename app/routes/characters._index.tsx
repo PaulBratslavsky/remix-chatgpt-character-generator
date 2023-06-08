@@ -1,3 +1,4 @@
+import { Link } from "@remix-run/react"
 import { json } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import type { V2_MetaFunction } from "@remix-run/node";
@@ -16,9 +17,9 @@ export const meta: V2_MetaFunction = () => {
 const Card = ({ data }: { data: any }) => {
   const { attributes: character } = data;
   return (
-    <div className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
+    <Link to={data.id.toString()} className="max-w-sm mx-auto bg-white shadow-lg rounded-lg overflow-hidden">
       <img
-        className="w-full h-56 object-cover object-center"
+        className="w-full h-56 object-fit object-top"
         src={character.imageUrl}
         alt={character.name}
       />
@@ -29,7 +30,7 @@ const Card = ({ data }: { data: any }) => {
         <p className="text-gray-600 mt-2">{character.gender}</p>
         <p className="text-gray-700 text-base mt-4">{character.description}</p>
       </div>
-    </div>
+    </Link>
   );
 };
 
