@@ -8,6 +8,7 @@ import {
   Scripts,
   ScrollRestoration,
 } from "@remix-run/react";
+import TopNav from "~/components/TopNav"
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -23,7 +24,10 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
+        <TopNav />
+        <div className="container mx-auto">
+          <Outlet />
+        </div>
         <ScrollRestoration />
         <Scripts />
         <LiveReload />

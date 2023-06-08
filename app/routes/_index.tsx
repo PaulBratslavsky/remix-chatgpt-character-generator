@@ -2,6 +2,7 @@ import { json } from "@remix-run/node";
 import { Form, useActionData, useNavigation } from "@remix-run/react";
 import { generateRandomCharacter } from "~/api/chat-gpt.server";
 import type { V2_MetaFunction } from "@remix-run/node";
+import { saveCharacter } from "~/api/strapi.server";
 
 export const meta: V2_MetaFunction = () => {
   return [
@@ -56,23 +57,27 @@ const Spinner = () => (
 
 const SubmitForm = () => (
   <Form method="post">
-    <button className="bg-violet-600 text-white px-3 py-2 rounded-md" type="submit">Generate Character</button>
+    <button
+      className="bg-violet-600 text-white px-3 py-2 rounded-md"
+      type="submit"
+    >
+      Generate Character
+    </button>
   </Form>
 );
 
 export const action = async () => {
   const characterResponse = await generateRandomCharacter();
-  return json({
-    data: { character: { ...characterResponse } },
-  });
+  await saveCharacter(characterResponse);
+  return json({ data: { character: { ...characterResponse } } });
 };
 
-export default function CharacterMainRoute() {
+export default function CharacterGenerateRoute() {
   const loaderData = useActionData<typeof action>();
   const navigation = useNavigation();
 
   return (
-    <div className="h-screen flex justify-center items-center">
+    <div className="h-[calc(100vh-56px)] flex justify-center items-center">
       <div>
         {loaderData && <Card character={loaderData.data.character} />}
         <div className="m-4 flex justify-center items-center">

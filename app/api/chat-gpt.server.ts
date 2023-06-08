@@ -50,6 +50,8 @@ export async function generateRandomCharacter() {
     imageUrl: responseImage.data.data[0].url
   }
 
+  console.log(finalCharacter)
+
   // Returning the final character object
   return finalCharacter;
 }
